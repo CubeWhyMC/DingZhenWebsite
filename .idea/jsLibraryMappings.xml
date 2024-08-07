@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{three.js}" />
+    <file url="PROJECT" libraries="{busuanzi.pure.mini, countable, docsify, docsify-pagination, docsify-themeable, emoji, index, main, prism-bash, prism-python, search, style, tex-mml-chtml, three.js, zoom-image}" />
   </component>
 </project>
