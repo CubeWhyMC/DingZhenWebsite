@@ -24,5 +24,6 @@
     <orderEntry type="library" name="docsify-pagination" level="application" />
     <orderEntry type="library" name="countable" level="application" />
     <orderEntry type="library" name="busuanzi.pure.mini" level="application" />
+    <orderEntry type="library" name="docsify-footer" level="application" />
   </component>
 </module>

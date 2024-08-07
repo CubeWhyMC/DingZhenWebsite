@@ -1,4 +1,4 @@
 
-- [欢迎](welcome.md)
+- [欢迎](README.md)
 - [激活账户](dz/activate.md)
 

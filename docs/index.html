@@ -51,6 +51,8 @@
         mergeNavbar: true,
         auto2top: true,
         executeScript: true,
+        // Or load from _footer.md
+        loadFooter: '_footer.md',
         //Latex设置
         latex: {
             inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -84,7 +86,7 @@
             color: 'rgb(90,90,90)',
             language: 'chinese',
             isExpected: true
-        }
+        },
     }
 </script>
 <!-- MathJax -->
@@ -96,6 +98,8 @@
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
 <!-- 图片放大缩小支持 -->
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<!-- use the footer plugin latest version -->
+<script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
 <!-- 深色主题切换器 -->
 <script
         src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-themeable/main.min.js"
