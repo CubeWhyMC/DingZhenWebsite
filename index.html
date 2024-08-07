@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="顶针租号玩,价格低至0.5r/d">
+    <title>顶针租号玩</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        .footer {
+            position: absolute;
+            left: 50%;
+            top: 90%;
+            transform: translate(-50%,-50%);
+        }
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div class="content">
+    <h1>维普租号玩</h1>
+    <div class="feature-card">
+        <h2>省心省力</h2>
+        <p>瑞克五代能帮你轻松完成各种任务，让生活更加轻松自在。</p>
+    </div>
+    <div class="feature-card">
+        <h2>分销商</h2>
+        <p>您可以对比价格, 选择价格最低的分销商</p>
+
+        <p>在<a href="https://lunarclient.top/donate">CubeWhyMC</a>购买</p>
+        <p>在<a href="https://shop.trollaura.top">shop.trollaura.top</a>购买</p>
+        <p>在<a href="https://slimehack.top">Slimehack</a>购买</p>
+    </div>
+</div>
+<div class="footer">
+    <p>Made by <a href="https://github.com/cubewhy">cubewhy</a> & HXY group members</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    // 创建 Three.js 场景
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas')});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // 创建粒子系统
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 5000;
+    const posArray = new Float32Array(particlesCount * 3);
+
+    for(let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 5;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+        color: 0xffffff
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    camera.position.z = 2;
+
+    // 动画循环
+    function animate() {
+        requestAnimationFrame(animate);
+        particlesMesh.rotation.x += 0.001;
+        particlesMesh.rotation.y += 0.001;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // 调整窗口大小
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // 背景音乐
+    const audio = new Audio('this-is-the-true-music.mp3');
+    audio.loop = true;
+
+    // 尝试自动播放
+    function attemptPlay() {
+        audio.play().then(() => {
+            console.log("Audio started playing");
+        }).catch(error => {
+            console.log("Auto-play was prevented. Will try again in 3 seconds.");
+            setTimeout(attemptPlay, 3000);
+        });
+    }
+
+    // 页面加载完成后尝试播放
+    window.addEventListener('load', attemptPlay);
+
+    // 用户交互时也尝试播放
+    document.body.addEventListener('click', attemptPlay);
+</script>
+</body>
+</html>
