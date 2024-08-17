@@ -177,7 +177,7 @@
             border-radius: 10px;
             padding: 10px;
             margin: 10px;
-            width: calc(20% - 20px); /* 每行最多5个框 */
+            width: calc(20% - 20px);
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -271,22 +271,19 @@
         const playPauseButton = document.getElementById('play-pause-button');
         const body = document.body;
         const audio = document.getElementById('background-audio');
-
-        // 初始化深色模式
+        
         body.classList.add('dark-mode');
 
-        // 更新图标
         function updateColor() {
             if (body.classList.contains('dark-mode')) {
-                toggleButton.textContent = '☀️';  // 太阳图标
+                toggleButton.textContent = '☀️';
                 canvasSettings.color = "236,240,241";
             } else {
-                toggleButton.textContent = '🌙';  // 月亮图标
+                toggleButton.textContent = '🌙';
                 canvasSettings.color = "44,62,80";
             }
         }
 
-        // 切换模式并更新图标和线条颜色
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
             updateColor();
@@ -294,14 +291,13 @@
 
         updateColor();
 
-        // 播放/暂停音乐
         playPauseButton.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                playPauseButton.textContent = '⏸'; // 暂停图标
+                playPauseButton.textContent = '⏸';
             } else {
                 audio.pause();
-                playPauseButton.textContent = '▶️'; // 播放图标
+                playPauseButton.textContent = '▶️';
             }
         });
     </script>
@@ -317,7 +313,7 @@
             function t(){
                 var t=e("script"),o=t.length,i=t[o-1];
                 return{
-                    l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:canvasSettings.color,n:n(i,"count",150) // 使用全局变量
+                    l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:canvasSettings.color,n:n(i,"count",100) 
                 }
             }
             function o(){
@@ -331,7 +327,7 @@
                     for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],
                     null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,
                     l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),
-                    t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+canvasSettings.color+","+(t+.6)+")", // 使用全局变量
+                    t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+canvasSettings.color+","+(t+.6)+")", 
                     r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))
                 }),
                 x(i)
