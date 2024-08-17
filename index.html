@@ -246,11 +246,11 @@
         <script>
             var config = {
                 element: "#captcha",
-                textBefore: "进行人机身份验证",
-                textDuring: "正在进行人机身份验证",
-                textAfter: "已通过人机身份验证",
-                duration: 2000,
-                success: true,
+                textBefore: "I'm not a robot",
+                textDuring: "Verifying...",
+                textAfter: "You're a robot",
+                duration: 5000,
+                success: false,
                 dark: false
             };
             captcha = new CAPTCHA(config);
