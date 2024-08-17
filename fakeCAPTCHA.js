@@ -26,7 +26,7 @@ function CAPTCHA(config) {
     </div>
     <a class="captcha-mark" href="https://lunarclient.top" target="_blank">
         <div class="captcha-mark-text">qbyCAPTCHA</div>
-        <img class="captcha-mark-logo" src="fakeCAPTCHA-LOGO.png" alt="fakeCAPTCHA LOGO">
+        <img class="captcha-mark-logo" src="fakeCAPTCHA-LOGO.png" alt="qbyCAPTCHA">
     </a>`;
     //检测深色主题
     if (config.dark) {
