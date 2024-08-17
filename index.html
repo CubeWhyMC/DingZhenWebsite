@@ -3,143 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="顶针租号玩,价格低至0.5r/d">
-    <title>顶针租号玩</title>
+    <title>丁真租号玩</title>
+    <script>
+        var canvasSettings = {
+            color: "236,240,241"
+        };
+    </script>    
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s, color 0.5s;
+            position: relative;
+            z-index: 1; 
+        }
+        
+        .dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            margin-right: 20px;
+            overflow: hidden;
+        }
+        
+        .avatar img {
             width: 100%;
             height: 100%;
-            /*overflow: hidden;*/
-            font-family: Arial, sans-serif;
-            color: white;
+            object-fit: cover;
         }
-        #canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
+        
+        h1, h2 {
+            color: #2c3e50;
         }
-        .content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
+        
+        .dark-mode h1, .dark-mode h2 {
+            color: #ecf0f1;
         }
-        .dev {
-            position: absolute;
-            z-index: 1;
-            left: 50%;
-            /*top: 90%;*/
-            transform: translate(-50%,-50%);
-        }
+        
         h1 {
-            font-size: 3em;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            font-size: 2.5em;
         }
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        
+        .section {
+            background-color: white;
             padding: 20px;
-            margin: 20px auto;
-            max-width: 600px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.5s, box-shadow 0.5s;
         }
+        
+        .dark-mode .section {
+            background-color: #34495e;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        
+        .dark-mode .footnote {
+            color: #bdc3c7;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.5s;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .dark-mode a {
+            color: #1abc9c;
+        }
+        
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.5s, transform 0.3s;
+            z-index: 1000;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background-color: #2980b9;
+        }
+        
+        #play-pause-button {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.5s, transform 0.3s;
+            z-index: 1000;
+        }
+        
+        #play-pause-button:hover {
+            transform: scale(1.1);
+            background-color: #2980b9;
+        }
+        
+        .distributor-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .distributor-box {
+            background-color: white;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            width: calc(20% - 20px); /* 每行最多5个框 */
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .dark-mode .distributor-box {
+            background-color: #34495e;
+            border-color: #1abc9c;
+        }
+        
+        .distributor-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .distributor-box a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .dark-mode .distributor-box a {
+            color: #ecf0f1;
+        }
+        
+        .distributor-box a:hover {
+            color: #2980b9;
+        }
+        
+        .dark-mode .distributor-box a:hover {
+            color: #1abc9c;
+        }
+        
     </style>
 </head>
+
 <body>
-<canvas id="canvas"></canvas>
-<div class="content">
-    <h1>维普租号玩</h1>
-    <div class="feature-card">
-        <h2>省心省力</h2>
-        <p>瑞克五代能帮你轻松完成各种任务，让生活更加轻松自在。</p>
-        <p>文档地址 <a href="/docs">/docs</a></p>
+    <audio id="background-audio" src="dingzhen.mp3" loop></audio>
+    <button id="theme-toggle"></button>
+    <button id="play-pause-button">▶️</button>
+
+    <div class="header">
+        <div class="avatar">
+            <img src="dingzhen.jpg" alt="丁真">
+        </div>
+        <h1>丁真租号玩</h1>
     </div>
-    <div class="feature-card">
+
+    <div class="section">
+        <h2>我们的优势</h2>
+        <p><strong>省心省力：</strong>瑞克五代能帮你轻松完成各种任务，让生活更加<strong>轻松自在</strong>。</p>
+        <p><strong>价格低廉：</strong>我们的价格非常低廉，相较于官网<strong>便宜了80%以上</strong>*。</p>
+        <p><strong>售后支持：</strong>我们拥有<strong>友好的售后支持</strong>，若您在使用过程中遇到问题，请及时联系团队成员或售后。</p>
+    </div>
+
+    <div class="section">
         <h2>分销商</h2>
-        <p>您可以对比价格, 选择价格最低的分销商</p>
-
-        <p>在<a href="/docs/index.html#/dz/buy">CubeWhyMC</a>购买</p>
-        <p>在<a href="https://shop.hln.asia">HLN-Boost</a>购买</p>
-        <p>在<a href="https://slimehack.top">Slimehack</a>购买</p>
-        <p>在<a href="https://shop.trollaura.top">TrollAura</a>购买</p>
-        <p>在<a href="http://niuqinghuixiang.huahuo123.top">牛青惠享</a>购买</p>
-        <br>
-        <p>除了这里列出的购买地址都不是我们验证过的,请仔细辨别</p>
+        <div class="distributor-container">
+            <div class="distributor-box">
+                <a href="/docs/index.html#/dz/buy">CubeWhyMC</a>
+            </div>
+            <div class="distributor-box">
+                <a href="https://shop.hln.asia">HLN-Boost</a>
+            </div>
+            <div class="distributor-box">
+                <a href="https://slimehack.top">Slimehack</a>
+            </div>
+            <div class="distributor-box">
+                <a href="https://shop.trollaura.top">TrollAura</a>
+            </div>
+            <div class="distributor-box">
+                <a href="http://niuqinghuixiang.huahuo123.top">牛青惠享</a>
+            </div>
+        </div>
+        <p>除此处列出的，其它购买地址都<strong>未经授权</strong>，请谨慎甄别。</p>
     </div>
-    <div class="feature-card">
-        <div class="dev">Made by <a href="https://github.com/cubewhy">cubewhy</a> & HXY group members</div>
+    
+    <div class="section footnote">
+        <p>* USD/CNY汇率作7.165计算，官网价格为9.99USD/月，租号玩价格为15CNY/月，最终结果约为80%。</p>
+        <p>Made by <a href="https://github.com/cubewhy">cubewhy</a> & HXY group members</p>
     </div>
-</div>
 
+    <script>
+        const toggleButton = document.getElementById('theme-toggle');
+        const playPauseButton = document.getElementById('play-pause-button');
+        const body = document.body;
+        const audio = document.getElementById('background-audio');
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-    // 创建 Three.js 场景
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({canvas: document.getElementById('canvas')});
-    renderer.setSize(window.innerWidth, window.innerHeight);
+        // 初始化深色模式
+        body.classList.add('dark-mode');
 
-    // 创建粒子系统
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 5000;
-    const posArray = new Float32Array(particlesCount * 3);
+        // 更新图标
+        function updateIcon() {
+            if (body.classList.contains('dark-mode')) {
+                toggleButton.textContent = '☀️';  // 太阳图标
+            } else {
+                toggleButton.textContent = '🌙';  // 月亮图标
+            }
+        }
 
-    for(let i = 0; i < particlesCount * 3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 5;
-    }
+        // 更新线条颜色
+        function updateLineColor() {
+            if (body.classList.contains('dark-mode')) {
+                canvasSettings.color = "236,240,241"; 
+            } else {
+                canvasSettings.color = "44,62,80"; 
+            }
+        }
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.005,
-        color: 0xffffff
-    });
-
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-
-    camera.position.z = 2;
-
-    // 动画循环
-    function animate() {
-        requestAnimationFrame(animate);
-        particlesMesh.rotation.x += 0.001;
-        particlesMesh.rotation.y += 0.001;
-        renderer.render(scene, camera);
-    }
-    animate();
-
-    // 调整窗口大小
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // 背景音乐
-    const audio = new Audio('this-is-the-true-music.mp3');
-    audio.loop = true;
-
-    // 尝试自动播放
-    function attemptPlay() {
-        audio.play().then(() => {
-            console.log("Audio started playing");
-        }).catch(error => {
-            console.log("Auto-play was prevented. Will try again in 3 seconds.");
-            setTimeout(attemptPlay, 3000);
+        // 切换模式并更新图标和线条颜色
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            updateIcon();
+            updateLineColor();
         });
-    }
 
-    // 页面加载完成后尝试播放
-    window.addEventListener('load', attemptPlay);
+        updateIcon();
+        updateLineColor();
 
-    // 用户交互时也尝试播放
-    document.body.addEventListener('click', attemptPlay);
-</script>
+        // 播放/暂停音乐
+        playPauseButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = '⏸'; // 暂停图标
+            } else {
+                audio.pause();
+                playPauseButton.textContent = '▶️'; // 播放图标
+            }
+        });
+    </script>
+
+    <script>
+        !function(){
+            function n(n,e,t){
+                return n.getAttribute(e)||t
+            }
+            function e(n){
+                return document.getElementsByTagName(n)
+            }
+            function t(){
+                var t=e("script"),o=t.length,i=t[o-1];
+                return{
+                    l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:canvasSettings.color,n:n(i,"count",99) // 使用全局变量
+                }
+            }
+            function o(){
+                a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+                c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+            }
+            function i(){
+                r.clearRect(0,0,a,c);
+                var n,e,t,o,m,l;
+                s.forEach(function(i,x){
+                    for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],
+                    null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,
+                    l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),
+                    t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+canvasSettings.color+","+(t+.6)+")", // 使用全局变量
+                    r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))
+                }),
+                x(i)
+            }
+            var a,c,u,m=document.createElement("canvas"),
+            d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+            x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+            function(n){
+                window.setTimeout(n,1e3/45)
+            },
+            w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;opacity:"+d.o+";pointer-events:none;";
+            e("body")[0].appendChild(m),o(),window.onresize=o,
+            window.onmousemove=function(n){
+                n=n||window.event,y.x=n.clientX,y.y=n.clientY
+            },
+            window.onmouseout=function(){
+                y.x=null,y.y=null
+            };
+            for(var s=[],f=0;d.n>f;f++){
+                var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+            }
+            u=s.concat([y]),
+            setTimeout(function(){i()},100)
+        }();
+    </script>
+
 </body>
 </html>
