@@ -1,10 +1,6 @@
-//初始化验证器
 function CAPTCHA(config) {
-    //传递自身
     var self = this;
-    //设置验证器状态
     this.checked = false;
-    //填充验证器元素
     document.querySelector(config.element).classList.add("captcha");
     document.querySelector(config.element).innerHTML = `<div class="captcha-clickable">
         <div class="captcha-checkbox"></div>
@@ -28,21 +24,16 @@ function CAPTCHA(config) {
         <div class="captcha-mark-text">qbyCAPTCHA</div>
         <img class="captcha-mark-logo" src="fakeCAPTCHA-LOGO.png" alt="qbyCAPTCHA">
     </a>`;
-    //检测深色主题
     if (config.dark) {
         document.querySelector(config.element).classList.add("captcha-dark");
     }
-    //绑定点击事件
     document.querySelector(config.element + " .captcha-clickable").onclick = function () {
-        //寻找所需元素
         var checkbox = document.querySelector(config.element + " .captcha-checkbox");
         var spinner = document.querySelector(config.element + " .captcha-spinner");
         var success = document.querySelector(config.element + " .captcha-success");
         var failure = document.querySelector(config.element + " .captcha-failure");
         var text = document.querySelector(config.element + " .captcha-text");
-        //避免重复验证
         if (!self.checked) {
-            //开始验证过程
             checkbox.style.borderRadius = "50%";
             checkbox.style.transform = "scale(0)";
             checkbox.style.outlineWidth = "4px";
