@@ -8,6 +8,15 @@
         var canvasSettings = {
             color: "236,240,241"
         };
+        var config = {
+            element: "#captcha",
+            textBefore: "I'm not a robot",
+            textDuring: "Verifying...",
+            textAfter: "You're a robot",
+            duration: 2000,
+            success: false,
+            dark: false
+        };
     </script>    
     <style>
         body {
@@ -244,15 +253,6 @@
         <script src="fakeCAPTCHA.js"></script>
         <div id="captcha"></div>
         <script>
-            var config = {
-                element: "#captcha",
-                textBefore: "I'm not a robot",
-                textDuring: "Verifying...",
-                textAfter: "You're a robot",
-                duration: 2000,
-                success: false,
-                dark: false
-            };
             captcha = new CAPTCHA(config);
         </script>
     </div>
@@ -272,32 +272,25 @@
         body.classList.add('dark-mode');
 
         // 更新图标
-        function updateIcon() {
+        function updateColor() {
             if (body.classList.contains('dark-mode')) {
                 toggleButton.textContent = '☀️';  // 太阳图标
+                canvasSettings.color = "236,240,241";
+                config.dark = false;
             } else {
                 toggleButton.textContent = '🌙';  // 月亮图标
-            }
-        }
-
-        // 更新线条颜色
-        function updateLineColor() {
-            if (body.classList.contains('dark-mode')) {
-                canvasSettings.color = "236,240,241"; 
-            } else {
-                canvasSettings.color = "44,62,80"; 
+                canvasSettings.color = "44,62,80";
+                config.dark = true;
             }
         }
 
         // 切换模式并更新图标和线条颜色
         toggleButton.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
-            updateIcon();
-            updateLineColor();
+            updateColor();
         });
 
-        updateIcon();
-        updateLineColor();
+        updateColor();
 
         // 播放/暂停音乐
         playPauseButton.addEventListener('click', () => {
