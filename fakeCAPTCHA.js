@@ -22,7 +22,7 @@ function CAPTCHA(config) {
     </div>
     <a class="captcha-mark" href="https://lunarclient.top" target="_blank">
         <div class="captcha-mark-text">qbyCAPTCHA</div>
-        <img class="captcha-mark-logo" src="fakeCAPTCHA-LOGO.png" alt="qbyCAPTCHA">
+        <img class="captcha-mark-logo" src="fakeCAPTCHA.png" alt="qbyCAPTCHA">
     </a>`;
     if (config.dark) {
         document.querySelector(config.element).classList.add("captcha-dark");
