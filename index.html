@@ -308,7 +308,11 @@
             }
         });
         
-        playPauseButton.click();
+        window.onload = function() {
+            if (playPauseButton) {
+                playPauseButton.click();
+            }
+        };
 
     </script>
 
